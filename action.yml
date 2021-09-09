@@ -1,0 +1,28 @@
+name: "Cloudflare DNS Export"
+author: "Raiyan Sarker"
+description: "This actions would export DNS records from Cloudflare DNS and store it on Github"
+branding:
+  icon: "download-cloud"
+  color: "black"
+
+inputs:
+  NAME:
+    description: "Full name of your reposity with username (username/repository_name), e.g. raiyansarker/cludflare-dns-export"
+    required: true
+  GITHUB_TOKEN:
+    description: "Github Token"
+    required: true
+  ZONE_ID:
+    description: "Cloudflare zone id"
+    required: true
+  API_KEY:
+    description: "Cloudflare API key with DNS management permissions"
+    required: true
+  FOLDER:
+    description: "Folder where exported file would get saved"
+    required: false
+    default: "DNS"
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
