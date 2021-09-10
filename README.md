@@ -1,6 +1,33 @@
 # Cloudflare DNS Export
 
-This action uses Cloudflare API to get DNS details and saves it in a `txt` file. This action is fairly easy to setup. This only requires two information. One is `ZONE_ID` which you can find on the dashboard of your domain in Cloudflare.
+This action uses Cloudflare API to get DNS details and saves it in a `txt` file.
+
+## Example usage
+
+```
+name: Test
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Backup
+        uses: raiyansarker/cloudflare-dns-export@v1
+        with:
+          NAME: ${{ github.repository }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          ZONE_ID: ${{secrets.ZONE_ID}}
+          API_KEY: ${{secrets.API_KEY}}
+          FOLDER: backup
+```
+
+This action is fairly easy to setup. This only requires two information. One is `ZONE_ID` which you can find on the dashboard of your domain in Cloudflare.
 
 ![](./images/zone-id.png)
 
@@ -12,7 +39,7 @@ And you need to get `API_KEY` that does have DNS management permissions. In orde
 
 ### `NAME`
 
-**Required** Full name of your repository. It includes username and repository name (username/repository_name), e.g. `raiyansarker/cloudflare-dns-export`
+**Required** Full name of your repository. You can dynamically set it by using `${{ github.repository }}` or you can manually write it in this format `username/repository_name`, e.g. `raiyansarker/cloudflare-dns-export`
 
 ### `GITHUB_TOKEN`
 
@@ -76,31 +103,6 @@ raiyansarker.com.	1	IN	MX	10 alt4.aspmx.l.google.com.
 ;; TXT Records
 raiyansarker.com.	1	IN	TXT	"SECRETS for demo"
 
-```
-
-## Example usage
-
-```
-name: Test
-
-on:
-  schedule:
-    - cron: "*/5 * * * *"
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    name: Test
-    steps:
-      - uses: actions/checkout@v2
-      - name: Backup
-        uses: raiyansarker/cloudflare-dns-export@v1
-        with:
-          NAME: "raiyansarker/test"
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          ZONE_ID: ${{secrets.ZONE_ID}}
-          API_KEY: ${{secrets.API_KEY}}
-          FOLDER: backup
 ```
 
 ## License
