@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Backup
-        uses: raiyansarker/cloudflare-dns-export@v1
+        uses: raiyansarker/cloudflare-dns-export@v1.1
         with:
           NAME: ${{ github.repository }}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
