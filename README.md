@@ -25,6 +25,7 @@ jobs:
           ZONE_ID: ${{secrets.ZONE_ID}}
           API_KEY: ${{secrets.API_KEY}}
           FOLDER: backup
+          PREFIX: raiyansarker.com
 ```
 
 This action is fairly easy to setup. This only requires two information. One is `ZONE_ID` which you can find on the dashboard of your domain in Cloudflare.
@@ -56,6 +57,10 @@ And you need to get `API_KEY` that does have DNS management permissions. In orde
 ### `FOLDER`
 
 **Not-Required** The folder that you want to store DNS backup data. By Default - `DNS`
+
+### `PREFIX`
+
+**Not-Required** Prefix of the file name you want to save as, e.g. example.com. It would save files as `example.com - 13/09/2021 - 20-21-06.txt (PREFIX - DATE - TIME.txt)`. By Default - `example.com`
 
 ## Outputs
 
@@ -104,6 +109,10 @@ raiyansarker.com.	1	IN	MX	10 alt4.aspmx.l.google.com.
 raiyansarker.com.	1	IN	TXT	"SECRETS for demo"
 
 ```
+
+## Date and Format
+
+The date format is `dd-mm-yyyy` and time format is `hour-minute-second`. The timezone which is used to set the data and time is `GMT+0`
 
 ## License
 
