@@ -22,6 +22,10 @@ inputs:
     description: "Folder where exported file would get saved"
     required: false
     default: "DNS"
+  PREFIX:
+    description: "Prefix of the file name you want to save as, e.g. example.com"
+    required: false
+    default: "example.com"
 
 runs:
   using: "node12"
