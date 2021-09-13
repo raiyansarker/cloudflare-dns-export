@@ -10,6 +10,7 @@ async function main() {
   const ZONE_ID = core.getInput("ZONE_ID", { required: true });
   const API_KEY = core.getInput("API_KEY", { required: true });
   const FOLDER = core.getInput("FOLDER", { required: true });
+  const PREFIX = core.getInput("PREFIX", { required: true });
 
   if (!NAME)
     core.setFailed("Provide full name. Format: username/repository_name");
@@ -47,8 +48,8 @@ async function main() {
     await octokit.repos.createOrUpdateFileContents({
       owner: NAME.split("/")[0],
       repo: NAME.split("/")[1],
-      message: `New DNS backup ${getTime()}`,
-      path: `${FOLDER}/${ZONE_ID} - ${getTime()}.txt`,
+      message: `New DNS backup at ${getTime()}`,
+      path: `${FOLDER}/${PREFIX} - ${getTime()}.txt`,
       content: encode(data),
     });
     console.log("Uploaded");
